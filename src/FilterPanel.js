@@ -1,18 +1,6 @@
 import { POKEMON_TYPES } from "./utils"
 
-const FilterPanel = ({name,onSearch, type, onPageChange, onFilter}) => {
-
-
-    const handleSearchPoke = (value) => {
-        onSearch(value)
-        onPageChange(1)
-      }
-    
-      const handleFilterPoke = (type) => {
-        onFilter(type)
-        onPageChange(1)
-    
-      }
+const FilterPanel = ({name, onSearch, type, onPageChange, onFilter}) => {
     
 
     return (
@@ -20,7 +8,7 @@ const FilterPanel = ({name,onSearch, type, onPageChange, onFilter}) => {
         <input
             id="search_input"
           value={name}
-          onChange={(e) => handleSearchPoke(e.target.value)}
+          onChange={(e) => onSearch(e.target.value)}
           placeholder="Search Pokémon..."
           className="px-4 py-2 border border-slate-300 rounded-lg shadow-sm bg-white text-slate-800
       focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500"
@@ -28,7 +16,7 @@ const FilterPanel = ({name,onSearch, type, onPageChange, onFilter}) => {
         <select
         id="type_input"
           value={type}
-          onChange={(e) => handleFilterPoke(e.target.value)}
+          onChange={(e) => onFilter(e.target.value)}
           className="px-4 py-2 border border-slate-300 rounded-lg shadow-sm bg-white text-slate-800
       focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500"
         >
