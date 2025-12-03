@@ -12,3 +12,13 @@ export const POKEMON_TYPES = [
   'fighting', 'poison', 'ground', 'flying', 'psychic', 'bug',
   'rock', 'ghost', 'dragon', 'dark', 'steel', 'fairy'
 ];
+
+export const TypeBadge = ({ type }) => {
+  return <span
+    key={type}
+    style={{ backgroundColor: TYPE_COLORS[type] }}
+    className="px-3 py-1 rounded-full text-white text-xs font-semibold uppercase"
+  >
+    {type}
+  </span>
+}

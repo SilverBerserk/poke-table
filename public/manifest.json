@@ -1,0 +1,10 @@
+{
+    "name": "PokéTable",
+    "short_name": "PokéTable",
+    "description": "A clean Pokémon listing app with search, filters, and pagination.",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#2563eb",
+    "orientation": "portrait-primary"
+  }
