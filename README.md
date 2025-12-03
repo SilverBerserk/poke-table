@@ -69,7 +69,7 @@ Routes:
 ## Installation
 
 Clone the repository:
->git clone https://github.com/your-username/poke-table.git
+>git clone https://github.com/SilverBerserk/poke-table.git
 
 > cd poke-table
 
