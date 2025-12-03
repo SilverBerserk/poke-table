@@ -1,70 +1,128 @@
-# Getting Started with Create React App
+# PokéTable — React + TanStack Table + PokéAPI
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A Pokémon browser built with React, TanStack Table, TailwindCSS, and the PokéAPI.  
+The application displays 151 Pokémon in a paginated table with filtering, search, and detailed Pokémon pages.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+### 1. Data Table (TanStack Table)
+- Built using the @tanstack/react-table library.
+- Displays: ID, Name, Type(s), and Sprite.
+- Responsive layout styled with TailwindCSS.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 2. Pagination
+- Client-side pagination using TanStack Table's pagination model.
+- Custom UI for navigating pages.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 3. Filtering and Search
+- Search Pokémon by name.
+- Filter Pokémon by type.
+- Both features update the table instantly.
 
-### `npm test`
+### 4. Detail View
+- Clicking a Pokémon opens a dedicated detail page.
+- The detail view includes:
+  - Large official artwork
+  - Types
+  - English flavor text description
+  - Height and weight
+  - Base experience
+  - Capture rate
+  - Abilities (with hidden ability indicator)
+  - Full stat list and total stats
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 5. API Integration
+Uses the PokéAPI:
+- `/pokemon?limit=151` for the list
+- `/pokemon/:id` for stats and sprites
+- `/pokemon-species/:id` for flavor text and capture rate
 
-### `npm run build`
+### 6. Error Handling
+- Error states for both list and detail pages.
+- Displays error messages and a retry button.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 7. Routing
+Implemented with React Router.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Routes:
+/ - Pokémon table
+/:id - Pokémon detail view
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Tech Stack
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+| Technology        | Purpose                       |
+|-------------------|-------------------------------|
+| React 18          | UI and state management       |
+| React Router      | Routing and parameters        |
+| TanStack Table v8 | Table and pagination logic    |
+| Tailwind CSS      | Styling                       |
+| Axios             | API requests                  |
+| PokéAPI           | Data source                   |
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Installation
 
-## Learn More
+Clone the repository:
+>git clone https://github.com/your-username/poke-table.git
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+> cd poke-table
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Install dependencies:
 
-### Code Splitting
+> npm install
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Start the development server:
 
-### Analyzing the Bundle Size
+> npm start
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+The application runs at:
 
-### Making a Progressive Web App
+http://localhost:3000
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Assumptions
 
-### Deployment
+- Only the first 151 Pokémon are required.
+- Client-side pagination is sufficient for this dataset.
+- Filtering and search occur in-memory.
+- API errors are handled gracefully.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---
 
-### `npm run build` fails to minify
+## Requirements Coverage
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+| Requirement                                | Status |
+|--------------------------------------------|--------|
+| Use a table library                        | Yes (TanStack Table) |
+| Fetch data from PokéAPI                    | Yes |
+| Show ID, Name, Types, Sprite               | Yes |
+| Pagination                                 | Yes |
+| Filter by type                             | Yes |
+| Search by name                             | Yes |
+| Detail view                                | Yes |
+| Show abilities, stats, artwork             | Yes |
+| Error handling                             | Yes |
+| Route parameters                           | Yes |
+| Async operations                           | Yes (Axios) |
+
+---
+
+## Contributing
+
+Pull requests are welcome.  
+Issues may be opened for suggestions or bug reports.
+
+---
+
+## License
+
+This project is available under the MIT License.
+
