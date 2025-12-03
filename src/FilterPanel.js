@@ -1,18 +1,16 @@
-import {useSearchParams} from "react-router-dom"
 import { POKEMON_TYPES } from "./utils"
 
-const FilterPanel = ({name,onSearch, type, onFilter}) => {
+const FilterPanel = ({name,onSearch, type, onPageChange, onFilter}) => {
 
-    const [_,setSearchParam] = useSearchParams()
 
     const handleSearchPoke = (value) => {
         onSearch(value)
-        setSearchParam({ page: 1 })
+        onPageChange(1)
       }
     
       const handleFilterPoke = (type) => {
         onFilter(type)
-        setSearchParam({ page: 1 })
+        onPageChange(1)
     
       }
     

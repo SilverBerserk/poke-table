@@ -9,14 +9,12 @@ const PokeDetails = () => {
     const params = useParams()
     const navigate = useNavigate()
     const [poke, setPoke] = useState({})
-    const [imageLoaded, setImageLoaded] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
     const [isError, setIsError] = useState(false)
 
     useEffect(() => {
         params.id && getDetails(params.id)
     }, [params.id])
-
 
     const getDetails = (id) => {
         setIsLoading(true)
@@ -28,22 +26,17 @@ const PokeDetails = () => {
                     const image = sprites?.other?.["official-artwork"]?.front_default;
                     setPoke(prev => ({ ...prev, id, name, height, weight, abilities, stats, baseExperience: base_experience, types: types.map(type => type.type.name), image }))
                 }
-                ).catch(err => {
-                    setIsError(true)
-                    console.err(err)
-                }),
+                ),
             axios.get(`https://pokeapi.co/api/v2/pokemon-species/${id}`)
                 .then(res => {
                     const { flavor_text_entries, capture_rate } = res.data
                     const flavorText = flavor_text_entries.find(entry => entry.language.name === 'en')?.flavor_text.replace(/\f/g, ' ') || 'No description available.';
                     setPoke(prev => ({ ...prev, flavorText, captureRate: capture_rate }))
-
-                }).catch(err => {
-                    setIsError(true)
-                    console.err(err)
                 })]
-        )
-            .finally(() => setIsLoading(false))
+        ).catch(err => {
+            setIsError(true)
+            console.error(err)
+        }).finally(() => setIsLoading(false))
     }
 
     return (
@@ -60,7 +53,7 @@ const PokeDetails = () => {
                 <div className="flex flex-col items-center justify-center py-20 text-center">
                     <AlertCircle className="w-12 h-12 text-red-600 mb-4" />
                     <div className="text-red-600 text-xl font-semibold mb-2">
-                        Fail to load details
+                        Failed to load details
                     </div>
                     <button
                         onClick={() => getDetails(params.id)}
@@ -78,8 +71,7 @@ const PokeDetails = () => {
                         <div className="p-6 bg-gradient-to-r from-blue-400 to-purple-300">
                             <div className="flex items-center gap-6">
                                 <img
-                                    onLoad={() => setImageLoaded(true)}
-                                    src={imageLoaded ? poke.image : "https://pngimg.com/uploads/pokeball/pokeball_PNG21.png"}
+                                    src={poke.image}
                                     alt={poke.name}
                                     className="w-48 h-48 object-contain bg-white/20 rounded-lg p-4"
                                 />
@@ -162,8 +154,9 @@ const PokeDetails = () => {
                                 </div>
                             </div>
                         </div>
-
-                    </div>)}
+                    </div>
+                )
+            }
         </div>
     )
 }

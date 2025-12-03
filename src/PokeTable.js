@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useSearchParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios"
 import { TypeBadge } from './utils';
 import Pagination from './Pagination';
@@ -10,8 +10,6 @@ const POKEMON_LIMIT = 151
 const PAGE_LIMIT = 20
 
 const PokeTable = () => {
-  const [searchParams] = useSearchParams();
-  const page = Number(searchParams.get("page")) || 1;
 
   const navigate = useNavigate();
 
@@ -20,12 +18,11 @@ const PokeTable = () => {
   const [pokes, setPokes] = useState([])
   const [searchedPoke, setSearchedPoke] = useState("")
   const [filteredPoke, setFilteredPoke] = useState("all")
-
+  const [page, setPage] = useState(1)
 
   useEffect(() => {
     onLoadPokes()
   }, [])
-
 
   const onLoadPokes = () => {
     setIsLoading(true)
@@ -37,7 +34,7 @@ const PokeTable = () => {
             const res = details.map(({ data }) => {
               const { id, name, types, sprites } = data;
               return { id, name, types: types.map(type => type.type.name), sprites }
-            }).sort((a, b) => a - b)
+            }).sort((a, b) => a.id - b.id)
             setPokes(res)
           }).catch(err => {
             setIsError(true)
@@ -63,13 +60,13 @@ const PokeTable = () => {
         <h1 className="text-5xl font-bold text-gray-800 mb-5">Poké-Table</h1>
       </header>
 
-      <FilterPanel name={searchedPoke} onSearch={setSearchedPoke} type={filteredPoke} onFilter={setFilteredPoke} />
+      <FilterPanel name={searchedPoke} onSearch={setSearchedPoke} type={filteredPoke} onFilter={setFilteredPoke} onPageChange={setPage} />
 
       {isError ? (
         <div className="flex flex-col items-center justify-center py-20 text-center">
           <AlertCircle className="w-12 h-12 text-red-600 mb-4" />
           <div className="text-red-600 text-xl font-semibold mb-2">
-            Fail to loade pokes
+            Fail to load pokes
           </div>
           <button
             onClick={onLoadPokes}  
@@ -144,7 +141,7 @@ const PokeTable = () => {
               </tr>}
               </tbody>
             </table>
-            {!!pagedPokes.length && <Pagination page={page} pages={pages} />}
+            {!!pagedPokes.length && <Pagination page={page} pages={pages} onPageChange={setPage} />}
           </div>)}
     </div>
   );

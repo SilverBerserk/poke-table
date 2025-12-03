@@ -1,15 +1,13 @@
-import { useSearchParams } from "react-router-dom"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
-const Pagination = ({ page, pages }) => {
-    const [_, setSearchParam] = useSearchParams()
+const Pagination = ({ page, pages, onPageChange }) => {
 
     return (
         <div className="flex gap-2 my-6 flex-wrap justify-center">
             <button className={`px-3 py-2 rounded-lg border text-sm font-medium transition-all
                     ${page === 1 ? "bg-gray-200" : "hover:bg-slate-100"}`}
                 disabled={page === 1}
-                onClick={() => page > 1 && setSearchParam({ page: page - 1 })}>
+                onClick={() => page > 1 && onPageChange( page - 1 )}>
                 <ChevronLeft size={14} />
             </button>
             {[...Array(pages).keys()].map((pageButton) => {
@@ -19,7 +17,7 @@ const Pagination = ({ page, pages }) => {
                 return (
                     <button
                         key={pageNum}
-                        onClick={() => setSearchParam({ page: pageNum })}
+                        onClick={() => onPageChange( pageNum )}
                         className={`px-4 py-2 rounded-lg border text-sm font-medium transition-all
           ${isActive ? "bg-blue-400 text-white border-blue-500 shadow" : "bg-white text-slate-700 border-slate-300 hover:bg-slate-100"}`}
                     >
@@ -30,7 +28,7 @@ const Pagination = ({ page, pages }) => {
             <button className={`px-3 py-2 rounded-lg border text-sm font-medium transition-all
           ${page === pages ? "bg-gray-200" : "hover:bg-slate-100"}`}
                 disabled={page === pages}
-                onClick={() => page < pages && setSearchParam({ page: page + 1 })}>
+                onClick={() => page < pages && onPageChange( page + 1 )}>
                 <ChevronRight size={14} />
             </button>
 
